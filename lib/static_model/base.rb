@@ -118,7 +118,7 @@ module StaticModel
         return if loaded? && !reload
         begin
           raw_data = File.open(data_file) {|f| f.read }
-          parsed_data = ERB.new(raw_data).result
+          parsed_data = parse_erb? ? ERB.new(raw_data).result : raw_data
           data = YAML::load(parsed_data)
         rescue
           raise(StaticModel::BadDataFile, "The data file you specified '#{data_file}' was not in a readable format.")
@@ -153,6 +153,14 @@ module StaticModel
         # force reload
         @loaded = false
         @records = nil
+      end
+
+      def set_erb_parsing(value)
+        @parse_erb = value
+      end
+
+      def parse_erb?
+        @parse_erb.nil? ? true : @parse_erb
       end
 
       def count

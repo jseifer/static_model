@@ -52,6 +52,11 @@ class Project < StaticModel::Base
   belongs_to :author
 end
 
+class Magazine < StaticModel::Base
+  set_data_file File.join(File.dirname(__FILE__), 'data', 'magazines.yml')
+  set_erb_parsing false
+end
+
 class Test::Unit::TestCase
 
   def assert_all(collection)

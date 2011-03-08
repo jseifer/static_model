@@ -191,6 +191,12 @@ class TestStaticModel < Test::Unit::TestCase
           should "evaluate erb in current context" do
             assert_equal Author.first, @projects[1].author
           end
+
+          context "with erb parsing turned off" do
+            should "not parse erb" do
+              assert_equal '<%= 1+1 %>00', Magazine.first.cost
+            end
+          end
         end
 
         context "find" do
