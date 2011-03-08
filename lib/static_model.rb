@@ -6,6 +6,8 @@ require 'erb'  unless defined?(ERB)
 
 gem 'activesupport', '~> 3.0.3'
 require 'active_support'
+require 'active_support/inflector'
+require 'active_support/hash_with_indifferent_access'
 
 module StaticModel
   VERSION = '0.3.1'
